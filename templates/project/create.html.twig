@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Project
+{% endblock %}
+
+
+{% block body %}
+	{{ parent() }}
+
+	<h1>Create Project</h1>
+
+	{{ form_start(form) }}
+	<div class="form-group">
+		{{ form_label(form.projectName, 'Project Name:', {'label_attr': {'class': 'form-label'}}) }}
+		{{ form_widget(form.projectName, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.projectName) }}
+	</div>
+	<button type="submit" class="btn btn-primary">Create Project</button>
+	{{ form_end(form) }}
+{% endblock %}

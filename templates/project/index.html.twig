@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All Projects - My Website
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+
+	<div class="content">
+		<h1>All Projects with Related Tasks</h1>
+		<a href="{{ path('add_project') }}" class="btn btn-success">Add Project</a>
+
+		<a href="{{ path('add_task') }}" class="btn btn-success">Add Task</a>
+		<ul>
+			{% for project in projects %}
+				<li>
+					{{ project.projectName }}
+					<ul>
+						{% for task in project.tasks %}
+							<li>{{ task.taskName }}
+								- Due Date:
+								{{ task.dueDate|date('Y-m-d') }}</li>
+						{% endfor %}
+					</ul>
+					<a href="{{ path('show_project', {'id': project.id}) }}" class="btn btn-primary">Open Project</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

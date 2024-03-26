@@ -1,0 +1,18 @@
+{# templates/task/update.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Task
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+	<h1>Update Task</h1>
+	<form method="post">
+		{{ form_start(form) }}
+		{{ form_row(form.task_name, {'label': 'task_name'}) }}
+		{{ form_row(form.dueDate, {'label': 'Due Date'}) }}
+		<button type="submit" class="btn btn-primary">Update Task</button>
+		{{ form_end(form) }}
+	</form>
+{% endblock %}

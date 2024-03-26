@@ -3,3 +3,44 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+
+main_page:
+    path: /
+    controller: App\Controller\MainController::index
+    methods: ['GET']
+
+projects:
+    path: /
+    controller: App\Controller\ProjectController::index
+    methods: ['GET']
+
+addProject:
+    path: /
+    controller: App\Controller\ProjectController::addProject
+    methods: ['POST']
+
+addTask:
+    path: /
+    controller: App\Controller\TaskController::addTask
+    methods: ['POST']
+
+deleteProject:
+    path: /
+    controller: App\Controller\ProjectController::deleteProject
+    methods: ['DELETE']
+
+deleteTask:
+    path: /
+    controller: App\Controller\TaskController::deleteTask
+    methods: ['DELETE']
+
+updateProject:
+    path: /
+    controller: App\Controller\ProjectController::updateProject
+    methods: ['PUT']
+
+updateTask:
+    path: /
+    controller: App\Controller\TaskController::updateTask
+    methods: ['PUT']

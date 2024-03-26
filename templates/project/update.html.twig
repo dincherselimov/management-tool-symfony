@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+
+	<div class="w-4/5 m-auto pt-40 task-form-container">
+		<h1 class="text-6xl text-center pb-12">
+			Update Task
+		</h1>
+
+		{{ form_start(form, {'attr': {'class': 'task-form'}}) }}
+
+		{{ form_widget(form, {'attr': {'class': 'task-form-input'}}) }}
+
+		<button type="submit" class="uppercase mt-15 bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl task-form-submit">
+			Update
+		</button>
+
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

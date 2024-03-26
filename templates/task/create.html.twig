@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Task{% endblock %}
+
+{% block body %}
+
+    <h1>Create Task</h1>
+
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.task_name) }}
+        {{ form_widget(form.task_name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.task_name) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dueDate) }}
+        {{ form_widget(form.dueDate, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.dueDate) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Create Task</button>
+    {{ form_end(form) }}
+{% endblock %}

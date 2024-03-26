@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.main-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.main-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.site-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Additional styles for .content */
+.content {
+    padding: 20px;
+    text-align: center;
+}
+
+.content h1 {
+    margin-bottom: 20px;
+}
+
+.content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.content ul li {
+    margin-bottom: 10px;
+}
+
+.content ul li ul {
+    margin-top: 5px;
+}
+
+.content ul li ul li {
+    margin-left: 20px;
+}
