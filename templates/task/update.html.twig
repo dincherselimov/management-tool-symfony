@@ -1,18 +1,28 @@
-{# templates/task/update.html.twig #}
-
 {% extends 'base.html.twig' %}
 
-{% block title %}Update Task
-{% endblock %}
+{% block title %}Update Task{% endblock %}
 
 {% block body %}
-	{{ parent() }}
-	<h1>Update Task</h1>
-	<form method="post">
-		{{ form_start(form) }}
-		{{ form_row(form.task_name, {'label': 'task_name'}) }}
-		{{ form_row(form.dueDate, {'label': 'Due Date'}) }}
-		<button type="submit" class="btn btn-primary">Update Task</button>
-		{{ form_end(form) }}
-	</form>
+    {{ parent() }}
+    <h1>Update Task</h1>
+    <form id="update-task-form" method="post">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_row(form.task_name, {'label': 'Task Name'}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.dueDate, {'label': 'Due Date'}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.project_id, {'label': 'Project'}) }}
+        </div>
+        {{ form_end(form) }}
+    </form>
+    <button id="update-task-btn" class="btn btn-primary">Update Task</button>
+
+    <script>
+        document.getElementById('update-task-btn').addEventListener('click', function() {
+            document.getElementById('update-task-form').submit();
+        });
+    </script>
 {% endblock %}

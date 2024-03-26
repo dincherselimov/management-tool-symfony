@@ -6,17 +6,25 @@
 
     <h1>Create Task</h1>
 
-    {{ form_start(form) }}
-    <div class="form-group">
-        {{ form_label(form.task_name) }}
-        {{ form_widget(form.task_name, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.task_name) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.dueDate) }}
-        {{ form_widget(form.dueDate, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.dueDate) }}
-    </div>
-    <button type="submit" class="btn btn-primary">Create Task</button>
-    {{ form_end(form) }}
+    <form id="create-task-form" method="post">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.task_name) }}
+            {{ form_widget(form.task_name, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.task_name) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.dueDate) }}
+            {{ form_widget(form.dueDate, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.dueDate) }}
+        </div>
+        {{ form_end(form) }}
+        <button type="submit" id='create-task-btn' class="btn btn-primary">Create Task</button>
+    </form>
+
+    <script>
+        document.getElementById('create-task-btn').addEventListener('click', function() {
+            document.getElementById('create-task-form').submit();
+        });
+    </script>
 {% endblock %}

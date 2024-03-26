@@ -22,15 +22,18 @@
 
 			<nav class="main-nav">
 				<ul>
+					{# These are just for example  #}
 					<li><a href="{{path('main_page')}}">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
+					
+					{# this is working fine - list all projects and tasks #}
 					<li><a href="/projects">Projects</a></li>
 				</ul>
 			</nav>
 
 			<footer class="site-footer">
-				<p>&copy; {{ 'now' | date('Y') }} My Website. All rights reserved.</p>
+				<p>&copy; {{ 'now' | date('Y') }} My Website Footer</p>
 			</footer>
 
 		{% endblock %}

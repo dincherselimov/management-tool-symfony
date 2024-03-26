@@ -11,8 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-class TaskController extends AbstractController {
+/**
+ * Class TaskController
+ * @package App\Controller
+ *
+ * This controller manages operations related to tasks.
+ */
+class TaskController extends AbstractController
+{
 
     private $em;
     private $taskRepository;
@@ -21,13 +27,24 @@ class TaskController extends AbstractController {
     {
         $this->em = $em;
         $this->taskRepository = $taskRepository;
+
     }
 
+    /**
+     * Adds a new task.
+     *
+     * @param Request $request The HTTP request object.
+     *
+     * @return Response The HTTP response for adding a task.
+     *
+     * #[Route('/tasks/add', name: 'add_task')]
+     */
     #[Route('/tasks/add', name: 'add_task')]
-    public function addTask(Request $request): Response {
+    public function addTask(Request $request): Response
+    {
 
         $task = new Task();
-        $form = $this->createForm(TaskFormType::class, $task); 
+        $form = $this->createForm(TaskFormType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -44,11 +61,21 @@ class TaskController extends AbstractController {
         ]);
     }
 
-
+    /**
+     * Updates an existing task.
+     *
+     * @param int $id The ID of the task to update.
+     * @param Request $request The HTTP request object.
+     *
+     * @return Response The HTTP response for updating a task.
+     *
+     * #[Route('/tasks/update/{id}', name: 'update_task')]
+     */
     #[Route('/tasks/update/{id}', name: 'update_task')]
     public function updateTask($id, Request $request): Response
     {
         $task = $this->taskRepository->find($id);
+        $project = $task->getProjectId();
 
         if (!$task) {
             throw $this->createNotFoundException('Task not found');
@@ -60,8 +87,8 @@ class TaskController extends AbstractController {
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
 
-            // Redirect back to the project details page
-            return $this->redirectToRoute('show_project', ['id' => $task->getId()]);
+            return $this->redirectToRoute('show_project', ['id' => $project->getId()]);
+
         }
 
         return $this->render('task/update.html.twig', [
@@ -70,21 +97,29 @@ class TaskController extends AbstractController {
         ]);
     }
 
-    
+     /**
+     * Deletes a task.
+     *
+     * @param int $id The ID of the task to delete.
+     * @param Request $request The HTTP request object.
+     *
+     * @return Response The HTTP response for deleting a task.
+     *
+     * #[Route('/tasks/delete/{id}', methods: ['DELETE'], name: 'delete_task')]
+     */
     #[Route('/tasks/delete/{id}', methods: ['DELETE'], name: 'delete_task')]
     public function deleteTask($id, Request $request): Response
     {
         $task = $this->taskRepository->find($id);
-    
+
         if (!$task) {
             throw $this->createNotFoundException('Task not found');
         }
-    
+
         $this->em->remove($task);
         $this->em->flush();
-    
+
         return $this->redirect($request->headers->get('referer'));
     }
-    
 
 }

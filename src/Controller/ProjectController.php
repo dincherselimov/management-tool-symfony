@@ -11,6 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class ProjectController
+ * @package App\Controller
+ *
+ * This controller manages operations related to projects.
+ */
 class ProjectController extends AbstractController
 {
     private $em;
@@ -22,6 +28,13 @@ class ProjectController extends AbstractController
         $this->projectRepository = $projectRepository;
     }
 
+    /**
+     * Displays a list of all projects.
+     *
+     * @return Response The HTTP response containing the list of projects.
+     *
+     * #[Route('/projects', name: 'projects_list')]
+     */
     #[Route('/projects', name: 'projects_list')]
     public function index(): Response
     {
@@ -32,6 +45,15 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    /**
+     * Adds a new project.
+     *
+     * @param Request $request The HTTP request object.
+     *
+     * @return Response The HTTP response for adding a project.
+     *
+     * #[Route('/projects/add', name: 'add_project')]
+     */
     #[Route('/projects/add', name: 'add_project')]
     public function addProject(Request $request): Response
     {
@@ -53,6 +75,15 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    /**
+     * Displays details of a specific project.
+     *
+     * @param Project $project The project entity to display.
+     *
+     * @return Response The HTTP response containing the project details.
+     *
+     * #[Route('/projects/{id}', methods: ['GET'], name: 'show_project')]
+     */
     #[Route('/projects/{id}', methods: ['GET'], name: 'show_project')]
     public function show(Project $project): Response
     {
@@ -61,6 +92,16 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    /**
+     * Updates an existing project.
+     *
+     * @param int $id The ID of the project to update.
+     * @param Request $request The HTTP request object.
+     *
+     * @return Response The HTTP response for updating a project.
+     *
+     * #[Route('/projects/update/{id}', name: 'update_project')]
+     */
     #[Route('/projects/update/{id}', name: 'update_project')]
     public function updateProject($id, Request $request): Response
     {
@@ -76,7 +117,6 @@ class ProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
 
-            // Redirect back to the project details page
             return $this->redirectToRoute('show_project', ['id' => $project->getId()]);
         }
 
@@ -86,6 +126,15 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    /**
+     * Deletes a project.
+     *
+     * @param int $id The ID of the project to delete.
+     *
+     * @return Response The HTTP response for deleting a project.
+     *
+     * #[Route('/projects/delete/{id}', methods: ['GET', 'DELETE'], name: 'delete_project')]
+     */
     #[Route('/projects/delete/{id}', methods: ['GET', 'DELETE'], name: 'delete_project')]
     public function deleteProject($id): Response
     {

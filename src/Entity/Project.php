@@ -6,6 +6,7 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -16,8 +17,10 @@ class Project
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $projectName = null;
-
+    
     #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'project_id')]
     private Collection $tasks;
 
@@ -64,7 +67,6 @@ class Project
     public function removeTask(Task $task): static
     {
         if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
             if ($task->getProjectId() === $this) {
                 $task->setProjectId(null);
             }
